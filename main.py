@@ -1,2 +1,3 @@
-ddd
-hallo ik ben susan
+# ddd
+print("Hoi ik ben Inge")
+print('dit werkt')
