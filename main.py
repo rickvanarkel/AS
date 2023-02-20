@@ -1,8 +1,10 @@
-# ddd
-print("Hoi ik ben Inge")
-print('dit werkt')
-print('hoi')
-print('dit is laura')
-print('test again')
+# importing packages
+import pandas as pd
+import seaborn as sns
+import geopandas as gpd
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import networkx as nx
 
-print("Dit is een test van Daan, lukt het nu wel?")
+# reading datafiles
