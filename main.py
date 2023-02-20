@@ -1,4 +1,3 @@
-#ddd
+# ddd
+print("Hoi ik ben Inge")
 print('dit werkt')
-print('en werkt dit ook?')
-print('laura')
