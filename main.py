@@ -5,4 +5,4 @@ print('hoi')
 print('dit is laura')
 print('test again')
 
-print('Dit is een test van Daan, lukt het nu wel?')
+print("Dit is een test van Daan, lukt het nu wel?")
