@@ -1,5 +1,4 @@
 # ddd
 print("Hoi ik ben Inge")
 print('dit werkt')
-print('werkt dit 2')
-import mesa as m\
+print('Hallo Suus is hier nu ook!')
