@@ -1,4 +1,6 @@
 # ddd
 print("Hoi ik ben Inge")
 print('dit werkt')
-print('Hallo Suus is hier nu ook!')
+print('hoi')
+print('dit is laura')
+print('test again')
