@@ -1,3 +1,3 @@
-# ddd
-print("Hoi ik ben Inge")
+#ddd
 print('dit werkt')
+print('en werkt dit ook?')
