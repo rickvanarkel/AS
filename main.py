@@ -17,7 +17,7 @@ link_roads2 = './_uncleaned_data/_roads.tcv'
 df_bridges = pd.read_excel(link_bridges)
 df_BMMS = pd.read_excel(link_BMMS)
 df_roads = pd.read_csv(link_roads)
-df_roads2 = pd.read_csv(link_roads2, sep='\t', low_memory=False, header=None, skiprows=0)
+df_roads2 = pd.read_csv(link_roads2, sep='\t', low_memory=False, header=None, skiprows=1)
 
 print(df_roads2)
 
