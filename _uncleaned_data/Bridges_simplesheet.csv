@@ -2493,7 +2493,7 @@ Number;StructureName;StructureType;Condition of Bridge;TotalWidth;TotalLength;Co
 2492;Fulkumar Bridge.;RCC Girder Bridge;C;6,1;36,05;1998;3;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5617;LRP010a;LRP010;730;10,6;25;58;27,4;89;35;36,5;32
 2493;Abdullah'r Bazar Bridge;RCC Girder Bridge;C;7,32;6,85;1984;1;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5617;LRP011a;LRP011;680;11,57;25;58;20,1;89;35;3,2;62
 2494;;RCC Girder Bridge;A;4,4;13;1980;1;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5617;LRP016a;LRP016;310;16,19;25;57;11,7;89;33;2,4;0
-2495;Naodanga Pooler Par Bridge;RCC Girder Bridge;B;4,6;23,53;1988;3;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5617;LRP018c;LRP018;620;18,41;89;33;49,6;25;56;49,6;30
+2495;Naodanga Pooler Par Bridge;RCC Girder Bridge;B;4,6;23,53;1988;3;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5617;LRP018c;LRP018;620;18,41;25;56;49,6;89;33;49,6;30
 2496;;Steel Beam & RCC Slab;C;5,5;6,8;1990;1;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5621;LRP004a;LRP004;589;4,55;25;46;31;89;37;38;30
 2497;;Steel Beam & RCC Slab;C;5,5;6,8;1990;1;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5621;LRP005c;LRP004;2007;5,968;25;45;46;89;37;32;30
 2498;Arjundera Bridge.;PC Girder Bridge;A;9,6;35;2010;1;Rangpur;Rangpur;Kurigram;Kurigram - 1;Z5621;LRP005c;LRP004;2007;5,968;25;45;46;89;37;32;0
