@@ -14,7 +14,7 @@ link_roads = './_uncleaned_data/Roads_InfoAboutEachLRP.csv'
 link_roads2 = './_uncleaned_data/_roads.tcv'
 
 # creating pd dataframes
-df_bridges = pd.read_excel(link_bridges)
+df_bridges = pd.read_excel(link_bridges, header=None)
 df_BMMS = pd.read_excel(link_BMMS)
 df_roads = pd.read_csv(link_roads)
 df_roads2 = pd.read_csv(link_roads2, sep='\t', low_memory=False, skiprows=[0], header=None)
