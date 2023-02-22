@@ -45,9 +45,12 @@ df_bridges_lonlat_coord['Latitude'] = df_bridges_lonlat_coord['LatitudeDegree'] 
 df_bridges_lonlat_coord['Longitude'] = df_bridges_lonlat_coord['LongitudeDegree'] + '.' + df_bridges_lonlat_coord['LongitudeMinute'] + df_bridges_lonlat_coord['LongitudeSecond']
 
 df_bridges_lonlat_coord['geometry'] = [Point (xy) for xy in zip(df_bridges_lonlat_coord['Longitude'], df_bridges_lonlat_coord['Latitude'])]
-gdf_bridges_lonlat = gpd.GeoDataFrame(df_bridges_lonlat_coord, crs="EPSG:3857")
+gdf_bridges_lonlat = gpd.GeoDataFrame(df_bridges_lonlat_coord) # crs="EPSG:3857"
 
-gdf_bridges_lonlat.to_csv('./lonlat_bridges_test.csv')
+#gdf_bridges_lonlat.crs = AS.shapefile_bangladesh.crs
+#gdf_bridges_lonlat = gdf_bridges_lonlat.to_crs(epsg=3857)
+
+#gdf_bridges_lonlat.to_csv('./lonlat_bridges_test.csv')
 
 print(df_bridges_lonlat_coord.dtypes)
 
@@ -63,7 +66,7 @@ print(df_bridges_lonlat_coord)
 fig, ax = plt.subplots(figsize=(8,8))
 
 AS.shapefile_bangladesh.plot(ax=ax, edgecolor='white', linewidth=0.3)
-gdf_bridges_lonlat.plot(ax=ax)
+gdf_bridges_lonlat.plot('geometry', ax=ax)
 
 cx.add_basemap(ax, source=cx.providers.CartoDB.Positron)
 ax.set_axis_off()
