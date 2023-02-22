@@ -11,8 +11,17 @@ import contextily as cx
 # AS.df_bridges is the dataset where...
 # AS.df_BMMS is the dataset where...
 
-print(AS.df_bridges.head(5))
+#print(AS.df_bridges.head(5))
 #print(AS.df_BMMS.head(5))
+
+bridges_lonlat = ['Number', 'LatitudeDegree', 'LatitudeMinute', 'LatitudeSecond', 'LongitudeDegree', 'LongitudeMinute', 'LongitudeSecond']
+df_bridges_lonlat = AS.df_bridges.loc[:, bridges_lonlat]
+
+print(df_bridges_lonlat.isnull().sum())
+
+#df_bridges_lonlat['LatitudeDegree'] = df_bridges_lonlat[]
+
+#print(df_bridges_lonlat)
 
 # A map with all the shapefile of Bangladesh
 fig, ax = plt.subplots(figsize=(8,8))
@@ -23,4 +32,4 @@ cx.add_basemap(ax, source=cx.providers.CartoDB.Positron)
 ax.set_axis_off()
 ax.set_title('The country of Bangladesh')
 
-plt.show()
+#plt.show()
