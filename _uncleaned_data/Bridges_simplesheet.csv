@@ -3179,16 +3179,16 @@ Number;StructureName;StructureType;Condition of Bridge;TotalWidth;TotalLength;Co
 3178;Jor Bridge;RCC Girder Bridge;C;4,25;13;1986;1;Barisal;Patuakhali;Patuakhali;Patuakhali;Z8910;LRP033a;LRP033;400;33,48;22;25;55;90;33;17;90
 3179;Jor Bridge 2;RCC Girder Bridge;C;4,7;6;1987;1;Barisal;Patuakhali;Patuakhali;Patuakhali;Z8910;LRP033c;LRP033;450;33,53;22;25;53;90;33;15;500
 3180;Madonpur Bridge;Baily with Steel Deck;A;4,84;15,3;1997;1;Barisal;Patuakhali;Patuakhali;Patuakhali;Z8910;LRP034a;LRP034;830;34,88;22;25;12;90;33;17;0
-;;Steel Beam & RCC Slab;C;3,1;43;1978;8;Barisal;Barisal;Bhola;Charfession;Z8913;LRPSa;LRPS;320;0,32;22;23;35;90;41;20;30
-;;Truss with Steel Deck;C;4,3;35;1996;1;Barisal;Barisal;Bhola;Charfession;Z8913;LRP005a;LRP005;100;5,1;22;20;57;90;41;1;30
-;;RCC Girder Bridge;C;6;26;1998;3;Barisal;Barisal;Bhola;Bhola;Z8913;LRP009a;LRP009;140;8,97;22;20;11;90;42;54;31
-;;RCC Girder Bridge;C;5,6;29,3;1998;3;Barisal;Barisal;Bhola;Bhola;Z8913;LRP011a;LRP011;240;10,74;22;20;26;90;44;2;90
-;;RCC Girder Bridge;C;4;11;1995;1;Barisal;Barisal;Bhola;Bhola;Z8913;LRP017b;LRP017;670;16,54;22;20;45;90;47;31;30
-;;RCC Girder Bridge;A;4,3;32;1993;2;Barisal;Barisal;Bhola;Bhola;Z8915;LRP003a;LRP003;180;2,5;22;35;38;90;38;34;0
-;;Baily with Steel Deck;A;4,1;18;1994;1;Barisal;Barisal;Bhola;Bhola;Z8915;LRP006a;LRP006;50;5,35;22;35;26;90;40;8;0
-;;Baily with Steel Deck;A;4;12;1995;1;Barisal;Barisal;Bhola;Bhola;Z8915;LRP009a;LRP009;940;9,21;22;36;3;90;42;17;0
-;;RCC Girder Bridge;B;4;6;1992;1;Barisal;Barisal;Bhola;Bhola;Z8916;LRP002a;LRP002;410;2,31;22;36;52;90;40;50;1
-;;RCC Girder Bridge;C;6,67;20;2013;1;Barisal;Barisal;Bhola;Bhola;Z8916;LRP003a;LRP003;550;3,44;22;37;5;90;41;25;30
-;;Truss with Steel Deck;A;4,21;31,07;1995;1;Barisal;Barisal;Bhola;Bhola;Z8943;LRP007a;LRP007;305;6,692;22;25;43,5;90;47;18,1;0
-;;RCC Girder Bridge;B;4,06;12;1996;1;Barisal;Barisal;Bhola;Bhola;Z8943;LRP008c;LRP007;1717;8,104;22;25;48,6;90;46;30,3;30
-;;Baily with Steel Deck;A;5;27,36;2006;1;Barisal;Barisal;Bhola;Bhola;Z8948;LRP002a;LRPS;2070;2,07;22;24;51;90;47;30;0
+3181;;Steel Beam & RCC Slab;C;3,1;43;1978;8;Barisal;Barisal;Bhola;Charfession;Z8913;LRPSa;LRPS;320;0,32;22;23;35;90;41;20;30
+3182;;Truss with Steel Deck;C;4,3;35;1996;1;Barisal;Barisal;Bhola;Charfession;Z8913;LRP005a;LRP005;100;5,1;22;20;57;90;41;1;30
+3183;;RCC Girder Bridge;C;6;26;1998;3;Barisal;Barisal;Bhola;Bhola;Z8913;LRP009a;LRP009;140;8,97;22;20;11;90;42;54;31
+3184;;RCC Girder Bridge;C;5,6;29,3;1998;3;Barisal;Barisal;Bhola;Bhola;Z8913;LRP011a;LRP011;240;10,74;22;20;26;90;44;2;90
+3185;;RCC Girder Bridge;C;4;11;1995;1;Barisal;Barisal;Bhola;Bhola;Z8913;LRP017b;LRP017;670;16,54;22;20;45;90;47;31;30
+3186;;RCC Girder Bridge;A;4,3;32;1993;2;Barisal;Barisal;Bhola;Bhola;Z8915;LRP003a;LRP003;180;2,5;22;35;38;90;38;34;0
+3187;;Baily with Steel Deck;A;4,1;18;1994;1;Barisal;Barisal;Bhola;Bhola;Z8915;LRP006a;LRP006;50;5,35;22;35;26;90;40;8;0
+3188;;Baily with Steel Deck;A;4;12;1995;1;Barisal;Barisal;Bhola;Bhola;Z8915;LRP009a;LRP009;940;9,21;22;36;3;90;42;17;0
+3189;;RCC Girder Bridge;B;4;6;1992;1;Barisal;Barisal;Bhola;Bhola;Z8916;LRP002a;LRP002;410;2,31;22;36;52;90;40;50;1
+3190;;RCC Girder Bridge;C;6,67;20;2013;1;Barisal;Barisal;Bhola;Bhola;Z8916;LRP003a;LRP003;550;3,44;22;37;5;90;41;25;30
+3191;;Truss with Steel Deck;A;4,21;31,07;1995;1;Barisal;Barisal;Bhola;Bhola;Z8943;LRP007a;LRP007;305;6,692;22;25;43,5;90;47;18,1;0
+3192;;RCC Girder Bridge;B;4,06;12;1996;1;Barisal;Barisal;Bhola;Bhola;Z8943;LRP008c;LRP007;1717;8,104;22;25;48,6;90;46;30,3;30
+3193;;Baily with Steel Deck;A;5;27,36;2006;1;Barisal;Barisal;Bhola;Bhola;Z8948;LRP002a;LRPS;2070;2,07;22;24;51;90;47;30;0
