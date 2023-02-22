@@ -57,7 +57,10 @@ for data_dict in d.values():
 plt.legend(d.keys())
 plt.show()
 
+rdict = {}
+
 for x in roadnames:
     df = AS.df_roads.loc[AS.df_roads['road'] == x, 'lat']  # maakt df van elke weg apart met lat
+    rdict[x].append(df)
 
-    print(df.describe())
+print(rdict)
