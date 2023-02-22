@@ -47,7 +47,7 @@ df_bridges_lonlat_coord['Longitude'] = df_bridges_lonlat_coord['LongitudeDegree'
 df_bridges_lonlat_coord['geometry'] = [Point (xy) for xy in zip(df_bridges_lonlat_coord['Longitude'], df_bridges_lonlat_coord['Latitude'])]
 gdf_bridges_lonlat = gpd.GeoDataFrame(df_bridges_lonlat_coord, crs="EPSG:3857")
 
-gdf_bridges_lonlat.to_csv('./lonlat_bridges_test')
+gdf_bridges_lonlat.to_csv('./lonlat_bridges_test.csv')
 
 print(df_bridges_lonlat_coord.dtypes)
 
