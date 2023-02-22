@@ -66,7 +66,7 @@ plt.show()
 rdict_long = {}
 
 for x in roadnames:
-    df = AS.df_roads.loc[AS.df_roads['road'] == x, 'long']  # maakt df van elke weg apart met lat
+    df = AS.df_roads.loc[AS.df_roads['road'] == x, 'lon']  # maakt df van elke weg apart met lat
     rdict_long[x] = df
 
 #print(rdict['N1'])
