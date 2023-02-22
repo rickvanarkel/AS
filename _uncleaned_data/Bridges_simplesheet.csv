@@ -1,4 +1,4 @@
-﻿Number;StructureName;StructureType;Condition of Bridge;TotalWidth;TotalLength;ConstructionYear;NumberOfSpan;Zone;Circle;Division;Sub-Division;RoadNo;StructureLRPName;ReferenceLRPNo;LocationLRPOffset;LocationChainage;LatitudeDegree;LatitudeMinute;LatitudeSecond;LongitudeDegree;LongitudeMinute;LongitudeSecond;BCS1TotalScore
+Number;StructureName;StructureType;Condition of Bridge;TotalWidth;TotalLength;ConstructionYear;NumberOfSpan;Zone;Circle;Division;Sub-Division;RoadNo;StructureLRPName;ReferenceLRPNo;LocationLRPOffset;LocationChainage;LatitudeDegree;LatitudeMinute;LatitudeSecond;LongitudeDegree;LongitudeMinute;LongitudeSecond;BCS1TotalScore
 1;Kanch pur Bridge.;PC Girder Bridge;A;14,55;394,23;1986;8;Dhaka;Dhaka;Narayanganj;Narayanganj-1;N1;LRP008b;LRP005;3976;8,976;23;42;7,5;90;30;57,3;0
 2;Madanpur Bridge.(L);PC Girder Bridge;A;9,2;27,5;2003;1;Dhaka;Dhaka;Narayanganj;Vitikandi;N1;LRP013a;LRP013;305;12,66;23;41;28,4;90;32;41,6;0
 3;Madanpur Bridge(R);PC Girder Bridge;A;9,12;27,5;2007;1;Dhaka;Dhaka;Narayanganj;Vitikandi;N1;LRP013b;LRP013;333;12,688;23;41;28;90;32;41,6;0
