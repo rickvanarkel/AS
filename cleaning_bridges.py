@@ -10,12 +10,14 @@ import contextily as cx
 from shapely.geometry import Point, Polygon
 import cartopy.crs as ccrs
 
-link_in_country = './_uncleaned_data/bridge_points_within_bangladesh.csv'
-link_close_road = './_uncleaned_data/bridge_points_farfrom_osmroad.csv'
+link_in_country = './_uncleaned_data/bridges from GIS/bridges_in_bangladesh.csv'
+link_close_road = './_uncleaned_data/bridges from GIS/bridges_near_osmroads.csv'
+link_lrpinfo = './_uncleaned_data/Roads_InfoAboutEachLRP.csv'
 
 # creating pd dataframes
 df_bridges_in_country = pd.read_csv(link_in_country)
 df_bridges_near_roads = pd.read_csv(link_close_road)
+df_lrp_info = pd.read_csv(link_lrpinfo)
 
 # AS.df_bridges is the dataset where...
 # AS.df_BMMS is the dataset where...
@@ -77,6 +79,12 @@ df_BMMS_lonlat = AS.df_BMMS.loc[:, BMMS_lonlat]
 # Check if coordinates are swapped, they are not
 print(df_BMMS_lonlat.sort_values('lat', ascending=False).head(5))
 
+AS.df_BMMS['bridge_id'] = AS.df_BMMS['road'] + AS.df_BMMS['LRPName']
+
+df_BMMS_definitive = AS.df_BMMS
+
+
+
 # Add columns to df if the bridge is close to a road, and within Bangladesh
 '''
 # creating pd dataframes
@@ -97,37 +105,93 @@ for x in df_bridges_in_country['lrp']:
         df_BMMS_lonlat.loc[x, 'outside country'] = False
 '''
 
+print(df_BMMS_lonlat.nunique())
+
 print(df_BMMS_lonlat.isnull().sum())
 
+df_BMMS_lonlat['bridge_id'] = df_BMMS_lonlat['road'] + df_BMMS_lonlat['LRPName']
+df_bridges_near_roads['bridge_id']= df_bridges_near_roads['road'] + df_bridges_in_country['LRPName']
+df_bridges_in_country['bridge_id'] = df_bridges_in_country['road'] + df_bridges_in_country['LRPName']
+
+'''
+# Merge df_BMMS_lonlat and df_bridges_in_country on 'LRPName' and 'road'
+merged = pd.merge(df_BMMS_lonlat, df_bridges_in_country, on=['LRPName', 'road'], how='left')
+
+# Set 'outside country' to False for matching rows
+merged.loc[merged['bridge_id'].notnull(), 'outside country'] = False
+
+# Update df_BMMS_lonlat with the merged data
+df_BMMS_lonlat.update(merged[['lon', 'lat', 'outside country']])
+'''
+
 df_BMMS_lonlat['outside country'] = True
-for x in df_bridges_in_country['LRPName']:
-    if df_BMMS_lonlat['LRPName'].isin([x]).any():
-        df_BMMS_lonlat.loc[df_BMMS_lonlat['LRPName'] == x, 'outside country'] = False
+for x in df_bridges_in_country['bridge_id']:
+    if df_BMMS_lonlat['bridge_id'].isin([x]).any():
+        df_BMMS_lonlat.loc[(df_BMMS_lonlat['bridge_id'] == x), 'outside country'] = False
 
 print(f'Number of points outside of the country: {df_BMMS_lonlat["outside country"].value_counts()[True]}')
 
+
 df_BMMS_lonlat['far from road'] = True
-for x in df_bridges_near_roads['LRPName']:
-    if df_BMMS_lonlat['LRPName'].isin([x]).any():
-        df_BMMS_lonlat.loc[df_BMMS_lonlat['LRPName'] == x, 'far from road'] = False
+for x in df_bridges_near_roads['bridge_id']:
+    if df_BMMS_lonlat['bridge_id'].isin([x]).any():
+        df_BMMS_lonlat.loc[df_BMMS_lonlat['bridge_id'] == x, 'far from road'] = False
 
 print(f'Number of points far from road: {df_BMMS_lonlat["far from road"].value_counts()[True]}')
 
 df_BMMS_lonlat.loc[df_BMMS_lonlat['outside country'], ['lon', 'lat']] = np.nan
+df_BMMS_lonlat.loc[df_BMMS_lonlat['far from road'], ['lon', 'lat']] = np.nan
 
-print(df_BMMS_lonlat.sort_values('lat'))
 print(df_BMMS_lonlat.isnull().sum())
 
-print(df_bridges_near_roads)
+df_lrp_info['road_id'] = df_lrp_info['road'] + df_lrp_info['lrp']
+
+# Create a boolean mask for rows with missing lat and lon values
+mask = df_BMMS_lonlat['lat'].isnull() & df_BMMS_lonlat['lon'].isnull()
+
+counter = 0
+wrongbridgeid = []
+
+for x in df_lrp_info['road_id']:
+    if df_BMMS_lonlat['bridge_id'].isin([x]).any():
+        counter += 1
+    else:
+        wrongbridgeid.append(x)
+
+
+
+print(df_lrp_info['road_id'].nunique())
+print(df_BMMS_lonlat['bridge_id'].nunique())
+
+print(counter)
+
+
+# Loop over the road IDs in df_lrp_info
+for x in df_lrp_info['road_id']:
+    # Check if x matches any bridge IDs in df_BMMS_lonlat
+    if df_BMMS_lonlat['bridge_id'].isin([x]).any():
+        # Get the lat and lon values from df_lrp_info for this road ID
+        lat, lon = df_lrp_info.loc[df_lrp_info['road_id'] == x, ['lat', 'lon']].values[0]
+
+        # Update the lat and lon values in df_BMMS_lonlat where the mask is True
+        df_BMMS_lonlat.loc[mask & (df_BMMS_lonlat['bridge_id'] == x), ['lat', 'lon']] = [lat, lon]
+
+print(df_BMMS_lonlat.isnull().sum())
+
+print(df_BMMS_definitive.head(5))
 
 
 
 
-# drop rows with NaN values, since this is another problem type. The rows with NaN values are saved in another df.
-df_BMMS_lonlat_coord = df_BMMS_lonlat.dropna()
-df_BMMS_missingcoord = df_BMMS_lonlat[df_BMMS_lonlat.isnull().any(1)]
 
-#print(f'The number of missing coordinates is: {df_BMMS_missingcoord.shape[0]}')
+'''
+for x in df_lrp_info['road_id']:
+    for df_BMMS_lonlat['lat', 'lon'].isnull():
+        if df_BMMS_lonlat['bridge_id'].isin([x]).any():
+            df_BMMS_lonlat.loc[df_BMMS_lonlat['bridge_id'] == x, 'lat', 'lon'] = df_lrp_info['lat', 'lon']
+            #df_BMMS_lonlat.loc[df_BMMS_lonlat['bridge_id'] == x, 'lon'] = df_lrp_info['lon']
+'''
+
 
 '''
 #gdf_bridges_lonlat.crs = AS.shapefile_bangladesh.crs
