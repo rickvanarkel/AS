@@ -1,3 +1,5 @@
+import numpy
+
 import main as AS
 import pandas as pd
 import seaborn as sns
@@ -9,20 +11,6 @@ import networkx as nx
 import contextily as cx
 import warnings
 warnings.filterwarnings('ignore')
-#
-# print(AS.df_roads)
-# print(AS.df_roads2)
-
-# A map with all the shapefile of Bangladesh
-# fig, ax = plt.subplots(figsize=(8,8))
-#
-# AS.shapefile_bangladesh.plot(ax=ax, edgecolor='white', linewidth=0.3)
-#
-# cx.add_basemap(ax, source=cx.providers.CartoDB.Positron)
-# ax.set_axis_off()
-# ax.set_title('The country of Bangladesh')
-#
-# plt.show()
 
 roadnames = (AS.df_roads['road'].append(AS.df_roads['road'])).unique()
 rdict = {}
@@ -35,8 +23,28 @@ sns.set(color_codes=True)
 sns.scatterplot(data = rdict['N1']['lon'])
 plt.show()
 
-print(rdict['N1'])
-z =  rdict['N1']['lon']
-
 print(AS.df_roads['lon'].describe())
 print(AS.df_roads['lat'].describe())
+
+# for key in rdict:
+#     print(key)
+#     outliers = []
+#     threshold = 1.8
+#     mean = np.mean(rdict[key]['lat'])
+#     std = np.std(rdict[key]['lat'])
+#     print(mean)
+#     print(std)
+#
+#     for value in rdict[key]['lat']:
+#         #print(value)
+#         z_score = (value - mean)/std
+#         if np.abs(z_score) > threshold:
+#             outliers.append(value)
+
+for df in rdict.values():
+    df['lon_dif'] = abs(df['lon'].astype(float).diff())
+    df['lat_dif'] = abs(df['lat'].astype(float).diff())
+    df.loc[df['lon_dif'] > 0.01, 'lon'] = numpy.NAN
+    df.loc[df['lat_dif'] > 0.01, 'lat'] = numpy.NAN
+
+    #print(df)
