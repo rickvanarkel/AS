@@ -1,22 +1,32 @@
 import numpy
-import main as AS
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 
+link_bridges = './_uncleaned_data/Bridges_simplesheet.csv'
+link_BMMS = './_uncleaned_data/BMMS_overview.xlsx'
+link_roads = './_uncleaned_data/Roads_InfoAboutEachLRP.csv'
+link_roads2 = './_uncleaned_data/_roads.tcv'
+
+# creating pd dataframes
+df_bridges = pd.read_csv(link_bridges, sep=';')
+df_BMMS = pd.read_excel(link_BMMS)
+df_roads = pd.read_csv(link_roads)
+df_roads2 = pd.read_csv(link_roads2, sep='\t', low_memory=False, skiprows=[0], header=None)
+
 # Get unique road names and initialize dictionary
-roadnames = (AS.df_roads['road'].append(AS.df_roads['road'])).unique()
+roadnames = (df_roads['road'].append(df_roads['road'])).unique()
 rdict = {}
 
 # Loop over road names and create DataFrame for each road containing longitude and latitude coordinates
 for x in roadnames:
-    df = AS.df_roads.loc[AS.df_roads['road'] == x, ['lon', 'lat']]
+    df = df_roads.loc[df_roads['road'] == x, ['lon', 'lat']]
     rdict[x] = df
 
-print(AS.df_roads['lon'].describe())
-print(AS.df_roads['lat'].describe())
+print(df_roads['lon'].describe())
+print(df_roads['lat'].describe())
 
 # Plot scatter plot of longitude coordinates for road 'N1' to visualize outliers
 # To show scatter plots of other roads, for longitude or latitude, change [N1]['lon']
@@ -43,12 +53,12 @@ for df in rdict.values():
 
 print(clean_df)
 
-# Insert a new column called 'gap' into the 'AS.df_roads' DataFrame (otherwise JAVA will nog visualize the roads)
-AS.df_roads.insert(5, 'gap', '')
-# Replace 'lon' and 'lat' columns in 'AS.df_roads' with cleaned values from 'clean_df'
-AS.df_roads[['lon', 'lat']] = clean_df[['lon', 'lat']]
+# Insert a new column called 'gap' into the 'df_roads' DataFrame (otherwise JAVA will nog visualize the roads)
+df_roads.insert(5, 'gap', '')
+# Replace 'lon' and 'lat' columns in 'df_roads' with cleaned values from 'clean_df'
+df_roads[['lon', 'lat']] = clean_df[['lon', 'lat']]
 # Write cleaned DataFrame to CSV file called '_roads_cleaned.csv'
-AS.df_roads.to_csv('_roads_cleaned.csv', index=False)
+df_roads.to_csv('_roads_cleaned.csv', index=False)
 
 # Plot scatter plot of longitude coordinates for road 'N1' with cleaned values
 # To show scatter plots of other roads, for longitude or latitude, change [N1]['lon']
@@ -60,8 +70,8 @@ plt.show()
 ### Other attempt for cleaning the data: ###
 
 
-# print(AS.df_roads['lon'].describe())
-# print(AS.df_roads['lat'].describe())
+# print(df_roads['lon'].describe())
+# print(df_roads['lat'].describe())
 
 # for key in rdict:
 #     # iterate over each key in the rdict dictionary

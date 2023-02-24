@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import contextily as cx
 from shapely.geometry import Point, Polygon
-import cartopy.crs as ccrs
+
 
 link_in_country = './_uncleaned_data/bridge_points_within_bangladesh.csv'
 link_close_road = './_uncleaned_data/bridge_points_farfrom_osmroad.csv'
