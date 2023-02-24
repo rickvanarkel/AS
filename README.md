@@ -19,8 +19,7 @@ The code provided is an attempt to clean a dataset containing data about roads i
 
 The first step in the code is to create a dictionary called rdict that maps each unique road name in the dataset to a Pandas DataFrame containing the longitude and latitude coordinates of each point along that road. This is achieved by looping over the unique road names in the dataset, creating a new DataFrame for each road that contains only the longitude and latitude columns, and adding that DataFrame to the dictionary under the corresponding road name.
 
-The code then goes on to use the Seaborn library to create a scatter plot of the longitude coordinates for one of the roads in the dataset (N1), presumably to visualize any errors in the data. However, since the scatter plot is only showing the longitude coordinates, it is not clear how useful this visualization would be in identifying errors related to latitude coordinates.
-
+The code then goes on to use the Seaborn library to create a scatter plot of the longitude coordinates for one of the roads in the dataset (N1) to visualize any errors in the data.
 The next step in the code is to create an empty Pandas DataFrame called empty_df to hold the cleaned data. The code then loops over each DataFrame in the rdict dictionary and performs the following operations:
 
 1. Calculate the absolute difference between consecutive longitude and latitude values using the diff() method.
@@ -31,8 +30,13 @@ The resulting DataFrame with cleaned data is then appended to empty_df. Finally,
 
 Overall, this code is used as an approach for cleaning a dataset containing errors related to longitude and latitude coordinates. However, without more context about the specific errors in the dataset, it is difficult to say whether this approach will be effective in identifying and correcting all of the errors. 
 
+### Cleaning Bridges
+
+<>
+
 ## Placing the cleaned data into the model
 
+The output of the cleaning models is only usefull when used in tandem with a provided Java model. In order to be able to visualize the cleaned data sets. The files should be placed in "WBSIM_Lab1_cleanedDataset\infrastructure\".  
 
 ## Installations needed
 
