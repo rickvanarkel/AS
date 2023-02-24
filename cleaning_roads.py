@@ -149,3 +149,5 @@ plt.show()
 #         # find the rows that contain outliers for the current column
 #         print(f' These are the indexes of the outliers: {outliers}')
 #     print(df)
+
+pip freeze > requirements.txt
