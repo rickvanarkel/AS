@@ -1,4 +1,3 @@
-import main as AS
 import pandas as pd
 import seaborn as sns
 import geopandas as gpd
@@ -9,6 +8,16 @@ import networkx as nx
 import contextily as cx
 from shapely.geometry import Point, Polygon
 
+link_bridges = './_uncleaned_data/Bridges_simplesheet.csv'
+link_BMMS = './_uncleaned_data/BMMS_overview.xlsx'
+link_roads = './_uncleaned_data/Roads_InfoAboutEachLRP.csv'
+link_roads2 = './_uncleaned_data/_roads.tcv'
+
+# creating pd dataframes
+df_bridges = pd.read_csv(link_bridges, sep=';')
+df_BMMS = pd.read_excel(link_BMMS)
+df_roads = pd.read_csv(link_roads)
+df_roads2 = pd.read_csv(link_roads2, sep='\t', low_memory=False, skiprows=[0], header=None)
 
 link_in_country = './_uncleaned_data/bridge_points_within_bangladesh.csv'
 link_close_road = './_uncleaned_data/bridge_points_farfrom_osmroad.csv'
@@ -17,15 +26,15 @@ link_close_road = './_uncleaned_data/bridge_points_farfrom_osmroad.csv'
 df_bridges_in_country = pd.read_csv(link_in_country)
 df_bridges_near_roads = pd.read_csv(link_close_road)
 
-# AS.df_bridges is the dataset where...
-# AS.df_BMMS is the dataset where...
+# df_bridges is the dataset where...
+# df_BMMS is the dataset where...
 
-#print(AS.df_bridges.head(5))
-#print(AS.df_BMMS.head(5))
+#print(df_bridges.head(5))
+#print(df_BMMS.head(5))
 
 '''
 bridges_lonlat = ['Number', 'LatitudeDegree', 'LatitudeMinute', 'LatitudeSecond', 'LongitudeDegree', 'LongitudeMinute', 'LongitudeSecond']
-df_bridges_lonlat = AS.df_bridges.loc[:, bridges_lonlat]
+df_bridges_lonlat = df_bridges.loc[:, bridges_lonlat]
 
 # Check for missing values
 # print(df_bridges_lonlat.isnull().sum())
@@ -56,7 +65,7 @@ df_bridges_lonlat_coord['Longitude'] = df_bridges_lonlat_coord['LongitudeDegree'
 df_bridges_lonlat_coord['geometry'] = [Point (xy) for xy in zip(df_bridges_lonlat_coord['Longitude'], df_bridges_lonlat_coord['Latitude'])]
 gdf_bridges_lonlat = gpd.GeoDataFrame(df_bridges_lonlat_coord) # crs="EPSG:3857"
 
-#gdf_bridges_lonlat.crs = AS.shapefile_bangladesh.crs
+#gdf_bridges_lonlat.crs = shapefile_bangladesh.crs
 #gdf_bridges_lonlat = gdf_bridges_lonlat.to_crs(epsg=3857)
 
 #gdf_bridges_lonlat.to_csv('./lonlat_bridges_test.csv')
@@ -68,11 +77,11 @@ print(df_bridges_lonlat_coord)
 '''
 
 # Check for missing values
-print(AS.df_BMMS.isnull().sum())
-print(AS.df_bridges.isnull().sum())
+print(df_BMMS.isnull().sum())
+print(df_bridges.isnull().sum())
 
 BMMS_lonlat = ['road','LRPName', 'lat', 'lon']
-df_BMMS_lonlat = AS.df_BMMS.loc[:, BMMS_lonlat]
+df_BMMS_lonlat = df_BMMS.loc[:, BMMS_lonlat]
 
 # Check if coordinates are swapped, they are not
 print(df_BMMS_lonlat.sort_values('lat', ascending=False).head(5))
@@ -82,7 +91,7 @@ print(df_BMMS_lonlat.sort_values('lat', ascending=False).head(5))
 # creating pd dataframes
 df_bridges_in_country 
 df_bridges_near_roads 
-AS.df_BMMS
+df_BMMS
 df_BMMS_lonlat
 
 Het liefst kolommen toevoegen aan df_BMMS_lonlat, twee kolommen: eentje met 'outside country' en de andere met 'far from road'
@@ -130,7 +139,7 @@ df_BMMS_missingcoord = df_BMMS_lonlat[df_BMMS_lonlat.isnull().any(1)]
 #print(f'The number of missing coordinates is: {df_BMMS_missingcoord.shape[0]}')
 
 '''
-#gdf_bridges_lonlat.crs = AS.shapefile_bangladesh.crs
+#gdf_bridges_lonlat.crs = shapefile_bangladesh.crs
 #gdf_bridges_lonlat = gdf_bridges_lonlat.to_crs(epsg=3857)
 #gdf_bridges_lonlat.to_csv('./lonlat_bridges_test.csv')
 #print(df_bridges_lonlat_coord.dtypes)
@@ -149,7 +158,7 @@ gdf_BMMS_lonlat = gpd.GeoDataFrame(df_BMMS_lonlat_coord, crs="EPSG:3857") # crs=
 
 fig, ax = plt.subplots(subplot_kw={'projection': crs})
 
-AS.shapefile_bangladesh.plot(ax=ax, edgecolor='white', linewidth=0.3)
+shapefile_bangladesh.plot(ax=ax, edgecolor='white', linewidth=0.3)
 gdf_BMMS_lonlat.plot(ax=ax, cmap='Reds')
 
 #cx.add_basemap(ax, source=cx.providers.CartoDB.Positron)
