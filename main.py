@@ -1,4 +1,3 @@
-# importing packages
 import pandas as pd
 import seaborn as sns
 import geopandas as gpd
@@ -6,6 +5,11 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import networkx as nx
+import contextily as cx
+from shapely.geometry import Point, Polygon
+import cartopy.crs as ccrs
+import warnings
+warnings.filterwarnings('ignore')
 
 # reading datafiles
 link_bridges = './_uncleaned_data/Bridges_simplesheet.csv'
@@ -32,7 +36,8 @@ shapefile_bangladesh2 = gpd.read_file(shape_bangladesh_link2)
 shapefile_bangladesh2 = shapefile_bangladesh2.to_crs(epsg=3857)# (epsg=3106)
 
 # run the subfiles
-
+execfile('cleaning_roads.py')
+execfile('cleaning_bridges.py')
 
 # under this, collect cleaned dataframes from other files
 
