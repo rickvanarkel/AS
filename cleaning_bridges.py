@@ -12,7 +12,7 @@ link_in_country = './_uncleaned_data/bridges from GIS/bridges_in_bangladesh.csv'
 link_close_road = './_uncleaned_data/bridges from GIS/bridges_near_osmroads.csv'
 
 # Cleaned lrp info
-link_lrpinfo = '_roads3.csv'
+link_lrpinfo = './_roads3.csv'
 #link_lrpinfo = './Roads_InfoAboutEachLRP.csv'
 
 # creating pd dataframes
