@@ -1,26 +1,41 @@
 import numpy
-import main as AS
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
 
+link_bridges = './_uncleaned_data/Bridges_simplesheet.csv'
+link_BMMS = './_uncleaned_data/BMMS_overview.xlsx'
+link_roads = './_uncleaned_data/Roads_InfoAboutEachLRP.csv'
+link_roads2 = './_uncleaned_data/_roads.tcv'
+
+# creating pd dataframes
+df_bridges = pd.read_csv(link_bridges, sep=';')
+df_BMMS = pd.read_excel(link_BMMS)
+df_roads = pd.read_csv(link_roads)
+df_roads2 = pd.read_csv(link_roads2, sep='\t', low_memory=False, skiprows=[0], header=None)
+
 # Get unique road names and initialize dictionary
-roadnames = (AS.df_roads['road'].append(AS.df_roads['road'])).unique()
+roadnames = (df_roads['road'].append(df_roads['road'])).unique()
 rdict = {}
 
 # Loop over road names and create DataFrame for each road containing longitude and latitude coordinates
 for x in roadnames:
-    df = AS.df_roads.loc[AS.df_roads['road'] == x, ['lon', 'lat']]
+    df = df_roads.loc[df_roads['road'] == x, ['lon', 'lat']]
     rdict[x] = df
 
-# Plot scatter plot of longitude coordinates for road 'N1'
+print(df_roads['lon'].describe())
+print(df_roads['lat'].describe())
+
+# Plot scatter plot of longitude coordinates for road 'N1' to visualize outliers
+# To show scatter plots of other roads, for longitude or latitude, change [N1]['lon']
 sns.set(color_codes=True)
 sns.scatterplot(data = rdict['N1']['lon'])
+plt.title("Original longitude value per LRP for road N1")
 plt.show()
 
-# Create a new, empty DataFrame called 'clean_df'
+# Create a new, empty DataFrame called 'clean_df' with columns named 'lat' and 'lon'
 clean_df = pd.DataFrame({'lon' : [], 'lat' : []})
 
 # Loop over DataFrames in 'rdict' and interpolate missing longitude and latitude values
@@ -33,25 +48,30 @@ for df in rdict.values():
     df.loc[df['lat_dif'] > 0.01, 'lat'] = numpy.NAN
     # Interpolate all NaN values
     df = df.interpolate()
+    # Add cleaned data to the new dataframe
     clean_df = clean_df.append(df)
 
 print(clean_df)
 
-# Insert a new column called 'gap' into the 'AS.df_roads' DataFrame
-AS.df_roads.insert(5, 'gap', '')
-# Replace 'lon' and 'lat' columns in 'AS.df_roads' with cleaned values from 'clean_df'
-AS.df_roads[['lon', 'lat']] = clean_df[['lon', 'lat']]
+# Insert a new column called 'gap' into the 'df_roads' DataFrame (otherwise JAVA will nog visualize the roads)
+df_roads.insert(5, 'gap', '')
+# Replace 'lon' and 'lat' columns in 'df_roads' with cleaned values from 'clean_df'
+df_roads[['lon', 'lat']] = clean_df[['lon', 'lat']]
 # Write cleaned DataFrame to CSV file called '_roads_cleaned.csv'
-AS.df_roads.to_csv('_roads_cleaned.csv', index=False)
+df_roads.to_csv('_roads3.csv', index=False)
 
 # Plot scatter plot of longitude coordinates for road 'N1' with cleaned values
+# To show scatter plots of other roads, for longitude or latitude, change [N1]['lon']
 sns.scatterplot(data = rdict['N1']['lon'])
+plt.title("Cleaned longitude value per LRP for road N1")
 plt.show()
 
-### Other attempts for cleaning the data:
 
-# print(AS.df_roads['lon'].describe())
-# print(AS.df_roads['lat'].describe())
+### Other attempt for cleaning the data: ###
+
+
+# print(df_roads['lon'].describe())
+# print(df_roads['lat'].describe())
 
 # for key in rdict:
 #     # iterate over each key in the rdict dictionary
@@ -75,10 +95,15 @@ plt.show()
 #         z_score = (value - mean)/std
 #         # calculate the z-score for the current value
 #         if np.abs(z_score) > threshold:
-#             # if the absolute value of the z-score is greater than the threshold, the current value is considered an outlier
+#             # if the value of the z-score is greater than the threshold, the current value is considered an outlier
 #             outliers.append(value)
 #             # add the current value to the list of outliers
 #
+#
+
+
+### Another attempt for cleaning the data: ###
+
 # def find_outliers(col):
 #     # define a function to find the outliers in a given column of data
 #     q1 = col.quantile(.25)
@@ -114,7 +139,7 @@ plt.show()
 #     return lower_range, upper_range
 #
 # for df in rdict.values():
-#     # loop over each value in the rdict dictionary (which should be a DataFrame)
+#     # loop over each value in the rdict dictionary
 #     bad_indexes = []
 #     for col in df.columns:
 #         # loop over each column in the DataFrame
@@ -122,5 +147,5 @@ plt.show()
 #         # calculate the lower and upper bounds for outlier detection
 #         outliers = df[(df[col] < lowerbound) | (df[col] > upperbound)]
 #         # find the rows that contain outliers for the current column
-#         print(f' These are the {outliers}')
+#         print(f' These are the indexes of the outliers: {outliers}')
 #     print(df)
